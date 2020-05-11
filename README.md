@@ -4,6 +4,7 @@
 
 ## API REST desarrollada con NestJS
 
-Se crea el proyecto de NestJS.
-Se crea el módulo de temas incluyendo controlador, servicio, repositorio, entidad y dto.
+* Se crea el proyecto de NestJS.
+* Se crea el módulo de temas incluyendo controlador, servicio, repositorio, entidad y dto.
+* Se modifica la función obtenertemas del controlador Temas para devolver una respuesta personalizada.
 

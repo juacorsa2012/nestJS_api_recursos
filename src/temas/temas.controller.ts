@@ -1,15 +1,21 @@
-import { Controller, Get, Param, Post, Put, UsePipes, ValidationPipe, Body, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, UsePipes, ValidationPipe, Body, ParseIntPipe, Query, Res } from '@nestjs/common';
 import { TemasService } from './temas.service';
 import { Tema } from './tema.entity';
 import { TemaDto } from './dto/TemaDto';
+import { FiltroDto } from './dto/FiltroDto';
 
 @Controller('temas')
 export class TemasController {
     constructor(private temasService: TemasService) {}
 
     @Get()
-    obtenerTemas(): Promise<Tema[]> {
-      return this.temasService.obtenerTemas()
+    async obtenerTemas(@Query() filtroDto: FiltroDto, @Res() res) {
+      const temas = await this.temasService.obtenerTemas(filtroDto)
+
+      return res.send({
+        count: temas.length,
+        data: temas
+      })
     }
 
     @Get('/:id')

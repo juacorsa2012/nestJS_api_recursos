@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TemasRepository } from './temas.repository';
 import { Tema } from './tema.entity';
 import { TemaDto } from './dto/TemaDto';
+import { FiltroDto } from './dto/FiltroDto';
 
 @Injectable()
 export class TemasService {
@@ -18,8 +19,8 @@ export class TemasService {
         return tema
     }
 
-    async obtenerTemas(): Promise<Tema[]> {
-        return this.temasRepository.find()
+    async obtenerTemas(filtroDto: FiltroDto): Promise<Tema[]> {
+        return this.temasRepository.obtenerTemas(filtroDto)
     }
 
     async crearTema(tema: TemaDto): Promise<Tema> {
