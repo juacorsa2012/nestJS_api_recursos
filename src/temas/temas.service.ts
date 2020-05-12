@@ -13,7 +13,7 @@ export class TemasService {
         const tema = await this.temasRepository.findOne(id)
 
         if (!tema) {
-            throw new NotFoundException(`Tema no encontrado con id ${id}`)
+            throw new NotFoundException(`Tema con ${id} no encontrado`)
         }
 
         return tema
@@ -23,7 +23,7 @@ export class TemasService {
         return this.temasRepository.obtenerTemas(filtroDto)
     }
 
-    async crearTema(tema: TemaDto): Promise<Tema> {
+    async crearTema(tema: TemaDto): Promise<void> {
         return this.temasRepository.crearTema(tema)
     }
 
@@ -33,7 +33,7 @@ export class TemasService {
         const tema = await this.obtenerTema(id)
 
         if (!tema) {
-            throw new NotFoundException(`Tema no encontrado con id ${id}`)
+            throw new NotFoundException(`Tema con ${id} no encontrado`)
         }
 
         tema.nombre = nombre 
