@@ -8,16 +8,16 @@ import { ConflictException, InternalServerErrorException } from "@nestjs/common"
 export class TemasRepository extends Repository<Tema> {
     async crearTema(temaDto: TemaDto): Promise<void> {
         const { nombre } = temaDto    
-        const tema = new Tema()
+        const tema = this.create()  
         tema.nombre = nombre   
         
         try {
             await tema.save()    
         } catch (error) {            
             if (error.sqlState === '23000') {
-                throw new ConflictException(`El tema ${nombre} ya existe en la base de datos`)
+                throw new ConflictException(`El tema ${nombre} ya existe en la base de datos.`)
             } else {
-                throw new InternalServerErrorException()
+                throw new InternalServerErrorException('Ha sido imposible completar la acción solicitada.')
             }
         }             
     }    
